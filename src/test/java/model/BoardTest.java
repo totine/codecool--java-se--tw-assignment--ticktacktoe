@@ -40,11 +40,41 @@ class BoardTest {
     }
 
     @Test
-    void test_init(){
-        board.init();
-        assertEquals(true, Arrays.deepEquals(Board.cells, array));
+    void testGetCells_returnsCells(){
+        Cell[][] cells = new Cell[3][3];
+        board.setCells(cells);
+        assertEquals(cells, board.getCells);
     }
 
+    @Test
+    void testInit_AfterCall_CellsHaveThreeRows(){
+        board.init();
+        assertEquals(3, board.getCells.length);
+    }
+
+    @Test
+    void testInit_AfterCall_CellsHaveThreeCols(){
+        board.init();
+        assertAll(assertEquals(3, board.getCells[0].length),
+                  assertEquals(3, board.getCells[1].length),
+                  assertEquals(3, board.getCells[2].length));
+    }
+
+    @Test
+    void testInit_AfterCall_AllCellsAreEmpty(){
+        board.init();
+        assertTrue(board.getCells.stream().allMatch(x -> x.getContent().equals(Seed.EMPTY)));
+    }
+
+    @Test
+    void testInit_AfterCall_AllCellsHaveCorrectColAndRowValue() {
+        for (int i=0; i<3; i++) {
+            for(int j=0; j<3; j++) {
+                assertEquals(j+1, board.getCells[i][j].getCol());
+                assertEquals(i+1, board.getCells[i][j].getRow());
+            }
+        }
+    }
     @Test // winning conditions needed
     void test_isDraw(){
         for (int col = 0; col < columns; col++) {
