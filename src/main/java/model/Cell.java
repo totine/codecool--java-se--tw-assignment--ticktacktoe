@@ -26,4 +26,8 @@ public class Cell {
     public Seed getContent() {
         return content;
     }
+
+    public void setContent(Seed seed) {
+        this.content = seed;
+    }
 }

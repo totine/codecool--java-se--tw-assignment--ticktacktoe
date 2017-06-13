@@ -23,4 +23,31 @@ class CellTest {
         Cell cell = new Cell(row, col);
         assertEquals(col, cell.getCol());
     }
+
+    @Test
+    void testGetContent() {
+        int row = 1;
+        int col = 2;
+        Cell cell = new Cell(row, col);
+        assertEquals(Seed.EMPTY, cell.getContent());
+    }
+
+    @Test
+    void testSetContent() {
+        int row = 1;
+        int col = 2;
+        Cell cell = new Cell(row, col);
+        cell.setContent(Seed.CROSS);
+        assertEquals(col, cell.getCol());
+    }
+
+    @Test
+    void clear() {
+        int row = 1;
+        int col = 2;
+        Cell cell = new Cell(row, col);
+        cell.setContent(Seed.CROSS);
+        cell.clear();
+        assertEquals(Seed.EMPTY, cell.getContent());
+    }
 }
