@@ -59,9 +59,10 @@ class BoardTest {
         @Test
         void testInit_AfterCall_CellsHaveThreeCols() {
             board.init();
-            assertEquals(3, board.getCells()[0].length);
-            assertEquals(3, board.getCells()[1].length);
-            assertEquals(3, board.getCells()[2].length);
+            assertAll(
+                    () -> assertEquals(3, board.getCells()[0].length),
+                    () -> assertEquals(3, board.getCells()[1].length),
+                    () -> assertEquals(3, board.getCells()[2].length));
         }
 
         //
@@ -89,6 +90,8 @@ class BoardTest {
         class HasWonTests {
             @BeforeEach
             void setupBeforeHasWonTests() {
+                rows = 3;
+                columns = 3;
                 Cell cells[][] = new Cell[rows][columns];
                 for (int row = 0; row < rows; row++) {
                     for (int col = 0; col < columns; col++) {

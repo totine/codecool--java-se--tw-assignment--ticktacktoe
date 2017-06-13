@@ -20,4 +20,27 @@ public class Board {
     public Cell[][] getCells() {
         return cells;
     }
+
+    public boolean hasWon(Seed seed, int row, int col) {
+        if(isSeedCountLessThanThree(seed)){
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isSeedCountLessThanThree(Seed seed){
+        int flag = 3;
+        int seedCounter = 0;
+        for (int i=0; i<cells.length;i++) {
+            for (int j=0; j<cells[i].length; j++) {
+                if(cells[i][j].getContent().equals(seed)) {
+                    seedCounter++;
+                    if (flag < seedCounter){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
 }
