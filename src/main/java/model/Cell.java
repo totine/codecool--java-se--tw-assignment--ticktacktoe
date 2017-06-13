@@ -1,12 +1,14 @@
 package model;
 
 public class Cell {
+    private Seed content;
     private int row;
     private int col;
 
     public Cell(int row, int col) {
         this.row = row;
         this.col = col;
+        this.content = Seed.EMPTY;
     }
 
     public int getRow() {
@@ -15,5 +17,13 @@ public class Cell {
 
     public int getCol() {
         return col;
+    }
+
+    public void clear(){
+        this.content = Seed.EMPTY;
+    }
+
+    public Seed getContent() {
+        return content;
     }
 }
