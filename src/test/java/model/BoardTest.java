@@ -105,12 +105,52 @@ class BoardTest {
             void testHasWon_IfFirstTryOnEmptyBoard_returnsFalse() {
                 assertEquals(false, board.hasWon(Seed.CROSS, 1, 1));
             }
+
             @Test
             void testHasWon_IfSeedCountIsLessThanThree_returnsFalse() {
 
                 board.getCells()[2][2].setContent(Seed.CROSS);
 
                 assertEquals(false, board.hasWon(Seed.CROSS, 1, 1));
+            }
+
+            @Test
+            void testHasWon_IfWinningConditionMetInRow() {
+
+                board.getCells()[1][1].setContent(Seed.CROSS);
+                board.getCells()[1][2].setContent(Seed.CROSS);
+
+                assertEquals(true, board.hasWon(Seed.CROSS, 1, 3));
+            }
+
+
+            @Test
+            void testHasWon_IfWinningConditionMetInRowMiddle() {
+
+                board.getCells()[1][1].setContent(Seed.CROSS);
+                board.getCells()[1][3].setContent(Seed.CROSS);
+
+                assertEquals(true, board.hasWon(Seed.CROSS, 1, 2));
+            }
+
+
+            @Test
+            void testHasWon_IfWinningConditionMetInCol() {
+
+                board.getCells()[2][1].setContent(Seed.CROSS);
+                board.getCells()[3][1].setContent(Seed.CROSS);
+
+                assertEquals(true, board.hasWon(Seed.CROSS, 1, 1));
+            }
+
+
+            @Test
+            void testHasWon_IfWinningConditionMetInDiagonalMiddle() {
+
+                board.getCells()[1][1].setContent(Seed.CROSS);
+                board.getCells()[3][3].setContent(Seed.CROSS);
+
+                assertEquals(true, board.hasWon(Seed.CROSS, 2, 2));
             }
         }
 
