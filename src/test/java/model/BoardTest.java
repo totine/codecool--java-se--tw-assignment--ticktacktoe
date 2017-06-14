@@ -99,6 +99,7 @@ class BoardTest {
                     }
                 }
                 board.setCells(cells);
+                board.init();
             }
 
             @Test
@@ -127,20 +128,20 @@ class BoardTest {
             @Test
             void testHasWon_IfWinningConditionMetInRowMiddle() {
 
-                board.getCells()[1][1].setContent(Seed.CROSS);
-                board.getCells()[1][3].setContent(Seed.CROSS);
+                board.getCells()[0][0].setContent(Seed.CROSS);
+                board.getCells()[0][1].setContent(Seed.CROSS);
 
-                assertEquals(true, board.hasWon(Seed.CROSS, 1, 2));
+                assertEquals(true, board.hasWon(Seed.CROSS, 1, 3));
             }
 
 
             @Test
             void testHasWon_IfWinningConditionMetInCol() {
 
-                board.getCells()[2][1].setContent(Seed.CROSS);
-                board.getCells()[3][1].setContent(Seed.CROSS);
+                board.getCells()[0][0].setContent(Seed.CROSS);
+                board.getCells()[1][0].setContent(Seed.CROSS);
 
-                assertEquals(true, board.hasWon(Seed.CROSS, 1, 1));
+                assertEquals(true, board.hasWon(Seed.CROSS, 3, 1));
             }
 
 
@@ -148,9 +149,9 @@ class BoardTest {
             void testHasWon_IfWinningConditionMetInDiagonalMiddle() {
 
                 board.getCells()[1][1].setContent(Seed.CROSS);
-                board.getCells()[3][3].setContent(Seed.CROSS);
+                board.getCells()[1][2].setContent(Seed.CROSS);
 
-                assertEquals(true, board.hasWon(Seed.CROSS, 2, 2));
+                assertEquals(true, board.hasWon(Seed.CROSS, 1, 3));
             }
         }
 
