@@ -1,13 +1,16 @@
 package model;
 
 public enum Seed {
-    EMPTY(""),
-    CROSS("x"),
-    NOUGHT("o");
+    EMPTY(" "),
+    CROSS("X"),
+    NOUGHT("O");
 
     String visualisation;
 
-    private Seed(String vis) {
+    Seed(String vis) {
         visualisation = vis;
+    }
+    public String visualisation() {
+        return visualisation;
     }
 }

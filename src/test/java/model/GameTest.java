@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.OccupiedCellException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +29,7 @@ class GameTest {
     }
 
     @Test
-    void updateGameState() {
+    void updateGameState() throws OccupiedCellException {
         game.initGame(3);
         game.updateGameState(Seed.CROSS, 1, 1);
         game.updateGameState(Seed.CROSS, 2, 1);

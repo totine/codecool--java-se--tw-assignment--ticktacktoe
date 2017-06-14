@@ -1,3 +1,4 @@
+import exceptions.OccupiedCellException;
 import model.Game;
 import model.GameState;
 import model.Seed;
@@ -14,7 +15,7 @@ public class GameController {
     int gameSize;
 
     public void initGame() {
-        gameSize = 3;
+        gameSize = 5;
         game = new Game();
         game.initGame(gameSize);
         ui = new UserInterface();
@@ -31,43 +32,50 @@ public class GameController {
     }
 
     public void showCurrentPlayer() {
+        System.out.println("Current player: " + game.getCurrentPlayer());
     }
 
     public void getInputFromPlayer() {
-        System.out.println("Input row:");
-        int a = 0;
-        while (a == 0) {
-            try {
-                currentMoveRow = ui.getNumberFromPlayer(gameSize);
-                a = 1;
-            } catch (InputMismatchException e) {
-                System.out.println("Input number");
-            }
-            catch (IllegalArgumentException e) {
-                System.out.println("Number must be less than " + gameSize);
-            }
-        }
-        a = 0;
-        System.out.println("Input col:");
-        while (a == 0) {
-            try {
-                currentMoveCol = ui.getNumberFromPlayer(gameSize);
-                a = 1;
-            } catch (InputMismatchException e) {
-                System.out.println("Input number");
-            }
-            catch (IllegalArgumentException e) {
-                System.out.println("Number must be less than " + gameSize);
-            }
-        }
+        boolean isCorrectInput = false;
 
-        game.updateGameState(game.getCurrentPlayer(), currentMoveRow, currentMoveCol);
+        while (!isCorrectInput) {
+            System.out.println("Input row:");
+            int a = 0;
+            while (a == 0) {
+                try {
+                    currentMoveRow = ui.getNumberFromPlayer(gameSize);
+                    a = 1;
+                } catch (InputMismatchException e) {
+                    System.out.println("Input number");
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Number must be less than " + gameSize);
+                }
+            }
+            a = 0;
+            System.out.println("Input col:");
+            while (a == 0) {
+                try {
+                    currentMoveCol = ui.getNumberFromPlayer(gameSize);
+                    a = 1;
+                } catch (InputMismatchException e) {
+                    System.out.println("Input number");
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Number must be less than " + gameSize);
+                }
+            }
+            try {
+                game.updateGameState(game.getCurrentPlayer(), currentMoveRow, currentMoveCol);
+                isCorrectInput = true;
+            }
+            catch (OccupiedCellException e) {
+                System.out.println("Cell is not empty, try again!");
+            }
+        }
     }
 
     public void showGameStatus() {
-        System.out.println(Arrays.asList(Arrays.stream(game.getBoard().getCells()[0]).map(x -> x.getContent() == Seed.CROSS ? "X" : x.getContent() == Seed.NOUGHT ? "O" : "").toArray()));
-        System.out.println(Arrays.asList(Arrays.stream(game.getBoard().getCells()[1]).map(x -> x.getContent() == Seed.CROSS ? "X" : x.getContent() == Seed.NOUGHT ? "O" : "").toArray()));
-        System.out.println(Arrays.asList(Arrays.stream(game.getBoard().getCells()[2]).map(x -> x.getContent() == Seed.CROSS ? "X" : x.getContent() == Seed.NOUGHT ? "O" : "").toArray()));
+        for (int i = 0; i < gameSize; i++)
+        System.out.println(Arrays.asList(Arrays.stream(game.getBoard().getCells()[i]).map(x -> x.getContent().visualisation()).toArray()));
 
 
     }

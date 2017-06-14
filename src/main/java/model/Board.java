@@ -1,6 +1,7 @@
 package model;
 
 import exceptions.IllegalCellsSizeException;
+import exceptions.OccupiedCellException;
 
 import java.util.Arrays;
 
@@ -27,7 +28,9 @@ public class Board {
         boardTriples = new BoardTriples(this.cells, boardSize);
     }
 
-    public void update(Seed seed, int row, int col) {
+    public void update(Seed seed, int row, int col) throws OccupiedCellException {
+        if (!cells[row-1][col-1].getContent().equals(Seed.EMPTY))
+            throw new OccupiedCellException("Cell is not empty!");
         cells[row-1][col-1].setContent(seed);
     }
 
@@ -36,7 +39,7 @@ public class Board {
     }
 
     public boolean hasWon(Seed seed, int row, int col)  {
-        update(seed, row, col);
+
         Seed[] pattern = new Seed[boardSize];
         Arrays.fill(pattern, seed);
         if (Arrays.equals(boardTriples.getCol(col), pattern) ||
