@@ -17,20 +17,19 @@ class GameTest {
 
     @Test
     void TestInitGameBoardInitialization() {
-        Board boardMock = mock(Board.class);
-        game.initGame();
-        assertEquals(game.getBoard().equals(boardMock));
+        game.initGame(3);
+        assertEquals(Board.class, game.getBoard().getClass());
     }
 
     @Test
     void TestInitGameCurrentStateInitialization() {
-        game.initGame();
-        assertEquals(game.getCurrentState().equals(GameState.PLAYING));
+        game.initGame(3);
+        assertEquals(GameState.PLAYING, game.getCurrentState());
     }
 
     @Test
     void updateGameState() {
-        game.initGame();
+        game.initGame(3);
         game.updateGameState(Seed.CROSS, 1, 1);
         game.updateGameState(Seed.CROSS, 2, 1);
         game.updateGameState(Seed.CROSS, 3, 1);

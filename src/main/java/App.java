@@ -21,16 +21,16 @@ public class App {
     }
 
     private void gameInit() {
-        while (isAppActive) {
+        //while (isAppActive) {
             gameController.initGame();
             gameController.chooseGameMode();
-            while (gameController.getIsGameEnd()) {
+            while (!gameController.getIsGameEnd()) {
                 gameController.showCurrentPlayer();
                 gameController.getInputFromPlayer();
                 gameController.showGameStatus();
             }
             gameController.showGameResults();
-            askToContinue();
-        }
+        //    askToContinue();
+      //  }
     }
 }

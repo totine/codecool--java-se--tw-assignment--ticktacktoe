@@ -23,7 +23,7 @@ class BoardTest {
     class InitTests {
         @BeforeEach
         void setUp() {
-            board = new Board();
+            board = new Board(3);
 
 //        int columns = 3;
 //        int rows = 3;
