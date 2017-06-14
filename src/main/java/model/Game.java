@@ -1,5 +1,6 @@
 package model;
 
+
 import exceptions.OccupiedCellException;
 
 public class Game {

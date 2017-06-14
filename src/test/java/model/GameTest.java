@@ -1,5 +1,6 @@
 package model;
 
+
 import exceptions.OccupiedCellException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

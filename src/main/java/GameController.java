@@ -1,3 +1,4 @@
+
 import exceptions.OccupiedCellException;
 import model.Game;
 import model.GameState;
@@ -15,7 +16,7 @@ public class GameController {
     int gameSize;
 
     public void initGame() {
-        gameSize = 5;
+        gameSize = 4;
         game = new Game();
         game.initGame(gameSize);
         ui = new UserInterface();
@@ -70,6 +71,7 @@ public class GameController {
             catch (OccupiedCellException e) {
                 System.out.println("Cell is not empty, try again!");
             }
+
         }
     }
 

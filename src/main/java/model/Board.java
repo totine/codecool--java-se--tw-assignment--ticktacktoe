@@ -1,6 +1,6 @@
 package model;
 
-import exceptions.IllegalCellsSizeException;
+
 import exceptions.OccupiedCellException;
 
 import java.util.Arrays;
@@ -45,18 +45,18 @@ public class Board {
         if (Arrays.equals(boardTriples.getCol(col), pattern) ||
                 Arrays.equals(boardTriples.getRow(row), pattern))
               return true;
-        if (boardSize%2 == 1 && row == col){
-            try {
-                if (Arrays.equals(boardTriples.getDiagFromLeftUp(), pattern)) {
+        if (row == col) {
+
+            if (Arrays.equals(boardTriples.getDiagFromLeftUp(), pattern)) {
                 return true;
-            }
-            } catch (IllegalCellsSizeException e) {
-                e.printStackTrace();
+
             }
         }
-        if (boardSize%2 == 1 && col == (boardSize+1)-row){
-            if (Arrays.equals(boardTriples.getDiagFromLeftDown(), pattern))
-                return true;
+        if (col == (boardSize+1)-row){
+
+                if (Arrays.equals(boardTriples.getDiagFromLeftDown(), pattern))
+                    return true;
+
         }
         return false;
     }
@@ -109,10 +109,8 @@ class BoardTriples {
     }
 
 
-    public Seed[] getDiagFromLeftUp() throws IllegalCellsSizeException {
-        if (cellsSize%2 == 0) {
-            throw new IllegalCellsSizeException();
-        }
+    public Seed[] getDiagFromLeftUp()  {
+
         Seed[] diag1 = new Seed[cellsSize];
         for (int i=0; i<cellsSize; i++) {
             diag1[i] = cells[i][i].getContent();
@@ -120,7 +118,8 @@ class BoardTriples {
         return diag1;
     }
 
-    public Seed[] getDiagFromLeftDown() {
+    public Seed[] getDiagFromLeftDown()  {
+
         Seed[] diag2 = new Seed[cellsSize];
         for (int i=0; i<3; i++) {
             diag2[i] = cells[i][(cellsSize-1)-i].getContent();
