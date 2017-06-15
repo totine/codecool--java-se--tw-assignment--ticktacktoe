@@ -39,26 +39,16 @@ public class GameController {
         System.out.println("3. Player vs. Computer - hard");
         int optionCount = 3;
         int choosenGameMode = ui.getNumberFromPlayer(optionCount);
-        switch (choosenGameMode) {
-            case 1:
-                gameMode = GameMode.PLAYER_VS_PLAYER;
-                firstPlayer = new PlayerReal(game.getCurrentPlayer());
-                secondPlayer = new PlayerReal(game.getOppositePlayer());
-                currentPlayer = firstPlayer;
-                break;
-            case 2:
-                gameMode = GameMode.PLAYER_VS_AI_EASY;
-                firstPlayer = new PlayerReal(game.getCurrentPlayer());
-                secondPlayer = new PlayerAIEasy(game.getOppositePlayer());
-                currentPlayer = firstPlayer;
-                break;
-            case 3:
-                gameMode = GameMode.PLAYER_VS_AI_HARD;
-                firstPlayer = new PlayerReal(game.getCurrentPlayer());
-                secondPlayer = new PlayerAIHard(game.getOppositePlayer());
-                currentPlayer = firstPlayer;
-                break;
-        }
+        gameMode = GameMode.getByOptionNumber(choosenGameMode);
+    }
+
+    public void setPlayers() {
+
+           firstPlayer = gameMode.getPlayer();
+           secondPlayer = new PlayerReal(Seed.NOUGHT);
+           currentPlayer = firstPlayer.getSeed().equals(game.getCurrentPlayer()) ? firstPlayer : secondPlayer;
+
+
 
     }
 

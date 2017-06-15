@@ -2,17 +2,13 @@ package model;
 
 import java.util.Arrays;
 
-/**
- * Created by joanna on 15.06.17.
- */
-public class PlayerAIHard extends Player {
 
-    int winCol;
-    int winRow;
-    int winDiag;
-    int dangerCol;
-    int dangerRow;
-    int dangerDiag;
+public class PlayerAIHard extends PlayerAIEasy {
+
+
+
+    int colToInput;
+    int rowToInput;
     Seed opponentSeed;
 
     public PlayerAIHard(Seed seed) {
@@ -24,15 +20,15 @@ public class PlayerAIHard extends Player {
     public PlayerInput getInputFromPlayer(Board board) {
         PlayerInput playerInput;
         if (board.isClear()) {
-            playerInput = inputIfClearBoard(board);
+            playerInput = inputIfClearBoard();
         }
 
         else if (isAlmostWin(board)) {
-            playerInput = winInput(board);
+            playerInput = winInput();
         }
 
         else if (isHaveToBlock(board)) {
-            playerInput = blockOpponent(board);
+            playerInput = blockOpponent();
         }
 
         else if (isCenterEmpty(board)) {
@@ -56,57 +52,18 @@ public class PlayerAIHard extends Player {
     }
 
     private boolean isCenterEmpty(Board board) {
-        return board.isEmptyCell(2,2);
+        int centerRow = (int) Math.ceil(board.getBoardSize()/2.0);
+        int centerCol = (int) Math.ceil(board.getBoardSize()/2.0);
+        return board.isEmptyCell(centerRow,centerCol);
     }
 
-    private PlayerInput blockOpponent(Board board) {
-        int row = dangerRow > 0 ? dangerRow : 0;
-        int col = dangerCol > 0 ? dangerCol : 0;
-        if (row > 0) {
-            col = getEmptyCell(board.getBoardTriples().getRow(dangerRow));
-        }
-        else if (col > 0) {
-            row = getEmptyCell(board.getBoardTriples().getRow(dangerCol));
-        }
-        else {
-            if (dangerDiag == 1) {
-                int emptyCell = getEmptyCell(board.getBoardTriples().getDiagFromLeftDown());
-                col = board.getBoardSize() - emptyCell + 1;
-                row = emptyCell;
-            }
-            else
-            {
-                int emptyCell = getEmptyCell(board.getBoardTriples().getDiagFromLeftUp());
-                row = emptyCell;
-                col = emptyCell;
-            }
-        }
-        return new PlayerInput(seed, row, col);
+    private PlayerInput blockOpponent() {
+        return new PlayerInput(seed, rowToInput, colToInput);
+
     }
 
-    private PlayerInput winInput(Board board) {
-        int row = winRow > 0 ? winRow : 0;
-        int col = winCol > 0 ? winCol : 0;
-        if (row > 0) {
-            col = getEmptyCell(board.getBoardTriples().getRow(winRow));
-        }
-        else if (col > 0) {
-            row = getEmptyCell(board.getBoardTriples().getRow(winCol));
-        }
-        else {
-            if (winDiag == 1) {
-                int emptyCell = getEmptyCell(board.getBoardTriples().getDiagFromLeftDown());
-                col = board.getBoardSize() - emptyCell+1;
-                row = emptyCell;
-            }
-            else
-            {
-                int emptyCell = getEmptyCell(board.getBoardTriples().getDiagFromLeftUp());
-                row = emptyCell;
-                col = emptyCell;
-            }
-        }
-        return new PlayerInput(seed, row, col);
+    private PlayerInput winInput() {
+        return new PlayerInput(seed, rowToInput, colToInput);
         }
 
     private int getEmptyCell(Seed[] cellsline) {
@@ -122,34 +79,34 @@ public class PlayerAIHard extends Player {
 
 
     private boolean isHaveToBlock(Board board) {
+        return checkBoard(board, opponentSeed);
+    }
+        private boolean checkBoard(Board board, Seed seed) {
         for (int i = 0; i < board.getBoardSize(); i++) {
-            if (Arrays.stream(board.getBoardTriples().getCol(i + 1)).filter(x -> x.equals(opponentSeed)).count() == 2
+            if (Arrays.stream(board.getBoardTriples().getCol(i + 1)).filter(x -> x.equals(seed)).count() == 2
                     & Arrays.stream(board.getBoardTriples().getCol(i + 1)).filter(x -> x.equals(Seed.EMPTY)).count() == 1) {
-                dangerCol = i + 1;
-                dangerDiag = 0;
-                dangerRow = 0;
+                colToInput = i + 1;
+                rowToInput = getEmptyCell(board.getBoardTriples().getCol(colToInput));
                 return true;
             }
-            if (Arrays.stream(board.getBoardTriples().getRow(i + 1)).filter(x -> x.equals(opponentSeed)).count() == 2
+            if (Arrays.stream(board.getBoardTriples().getRow(i + 1)).filter(x -> x.equals(seed)).count() == 2
                     & Arrays.stream(board.getBoardTriples().getRow(i + 1)).filter(x -> x.equals(Seed.EMPTY)).count() == 1) {
-                dangerRow = i + 1;
-                dangerCol = 0;
-                dangerDiag = 0;
+                rowToInput = i + 1;
+                colToInput = getEmptyCell(board.getBoardTriples().getRow(rowToInput));
                 return true;
             }
 
-            if (Arrays.stream(board.getBoardTriples().getDiagFromLeftDown()).filter(x -> x.equals(opponentSeed)).count() == 2
+            if (Arrays.stream(board.getBoardTriples().getDiagFromLeftDown()).filter(x -> x.equals(seed)).count() == 2
                     & Arrays.stream(board.getBoardTriples().getDiagFromLeftDown()).filter(x -> x.equals(Seed.EMPTY)).count() == 1) {
-                dangerDiag = 1;
-                dangerCol = 0;
-                dangerRow = 0;
+                colToInput = getEmptyCell(board.getBoardTriples().getDiagFromLeftDown());
+                rowToInput = board.getBoardSize() + 1 - colToInput;
+
                 return true;
             }
-            if (Arrays.stream(board.getBoardTriples().getDiagFromLeftUp()).filter(x -> x.equals(opponentSeed)).count() == 2
+            if (Arrays.stream(board.getBoardTriples().getDiagFromLeftUp()).filter(x -> x.equals(seed)).count() == 2
                     & Arrays.stream(board.getBoardTriples().getDiagFromLeftUp()).filter(x -> x.equals(Seed.EMPTY)).count() == 1) {
-                dangerDiag = 2;
-                dangerCol = 0;
-                dangerRow = 0;
+                colToInput = getEmptyCell(board.getBoardTriples().getDiagFromLeftUp());
+                rowToInput = colToInput;
                 return true;
             }
         }
@@ -158,52 +115,15 @@ public class PlayerAIHard extends Player {
 
 
     private boolean isAlmostWin(Board board) {
-        for (int i = 0; i<board.getBoardSize(); i++) {
-            if (Arrays.stream(board.getBoardTriples().getCol(i+1)).filter(x -> x.equals(seed)).count()==2
-                    & Arrays.stream(board.getBoardTriples().getCol(i + 1)).filter(x -> x.equals(Seed.EMPTY)).count() == 1) {
-                winCol = i + 1;
-                winDiag = 0;
-                winRow = 0;
-                return true;
-            }
-            if (Arrays.stream(board.getBoardTriples().getRow(i+1)).filter(x -> x.equals(seed)).count()==2
-                    & Arrays.stream(board.getBoardTriples().getRow(i + 1)).filter(x -> x.equals(Seed.EMPTY)).count() == 1) {
-                winRow = i + 1;
-                winCol = 0;
-                winDiag = 0;
-                return true;
-            }
-        }
-        if (Arrays.stream(board.getBoardTriples().getDiagFromLeftDown()).filter(x -> x.equals(seed)).count()==2
-                & Arrays.stream(board.getBoardTriples().getDiagFromLeftDown()).filter(x -> x.equals(Seed.EMPTY)).count() == 1 ) {
-            winDiag = 1;
-            winCol = 0;
-            winRow = 0;
-            return true;
-        }
-        if (Arrays.stream(board.getBoardTriples().getDiagFromLeftUp()).filter(x -> x.equals(seed)).count()==2
-                & Arrays.stream(board.getBoardTriples().getDiagFromLeftUp()).filter(x -> x.equals(Seed.EMPTY)).count() == 1) {
-            winDiag = 2;
-            winCol = 0;
-            winRow = 0;
-            return true;
-        }
-        return false;
+        return checkBoard(board, seed);
+
     }
 
-    private PlayerInput inputIfClearBoard(Board board) {
+    private PlayerInput inputIfClearBoard() {
         int row = 1;
         int col = 1;
         return new PlayerInput(seed, row, col);
     }
 
-    private PlayerInput getRandomInput(Board board) {
-        int row = (int) (Math.random()*board.getBoardSize()+1);
-        int col = (int) (Math.random()*board.getBoardSize()+1);
-        while (!board.isEmptyCell(row, col)) {
-            row = (int) (Math.random()*board.getBoardSize()+1);
-            col = (int) (Math.random()*board.getBoardSize()+1);
-        }
-        return new PlayerInput(seed, row, col);
-    }
+
 }
