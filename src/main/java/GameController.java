@@ -1,5 +1,9 @@
 
 import exceptions.OccupiedCellException;
+import model.Game;
+import model.GameState;
+import model.Seed;
+import ui.Printer;
 import model.*;
 import ui.UserInterface;
 
@@ -17,12 +21,14 @@ public class GameController {
     Player secondPlayer;
     Player currentPlayer;
 
+    Printer printer;
 
     public void initGame() {
         gameSize = 3;
         game = new Game();
         game.initGame(gameSize);
         ui = new UserInterface();
+        printer = new Printer();
 
     }
 
@@ -62,7 +68,7 @@ public class GameController {
     }
 
     public void showCurrentPlayer() {
-        System.out.println("Current player: " + game.getCurrentPlayer());
+        printer.currentPlayerDislay(game);
     }
 
     public void getInputFromPlayer() {
@@ -79,18 +85,12 @@ public class GameController {
     }
 
     public void showGameStatus() {
-        for (int i = 0; i < gameSize; i++)
-        System.out.println(Arrays.asList(Arrays.stream(game.getBoard().getCells()[i]).map(x -> x.getContent().visualisation()).toArray()));
-
-
+        printer.gameBoardDisplay(game, gameSize);
     }
 
     public void showGameResults() {
     }
 
-    public void setPlayers() {
-
-    }
 
     public void switchPlayers() {
         currentPlayer = firstPlayer.getSeed().equals(game.getCurrentPlayer()) ? firstPlayer : secondPlayer;
