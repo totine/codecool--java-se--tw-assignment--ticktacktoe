@@ -40,24 +40,19 @@ public class GameController {
         boolean isCorrectInput = false;
 
         while (!isCorrectInput) {
-            System.out.println("Input row:");
-            int a = 0;
-            while (a == 0) {
+            boolean dimensionInputSwitch = true;
+            int playerInputSwitch = 0;
+            while (playerInputSwitch != 2) {
                 try {
-                    currentMoveRow = ui.getNumberFromPlayer(gameSize);
-                    a = 1;
-                } catch (InputMismatchException e) {
-                    System.out.println("Input number");
-                } catch (IllegalArgumentException e) {
-                    System.out.println("Number must be less than " + gameSize);
-                }
-            }
-            a = 0;
-            System.out.println("Input col:");
-            while (a == 0) {
-                try {
-                    currentMoveCol = ui.getNumberFromPlayer(gameSize);
-                    a = 1;
+                   if(dimensionInputSwitch) {
+                       System.out.println("Input row:");
+                       currentMoveRow = ui.getNumberFromPlayer(gameSize);
+                       dimensionInputSwitch = false;
+                   } else {
+                       System.out.println("Input col:");
+                       currentMoveCol = ui.getNumberFromPlayer(gameSize);
+                   }
+                    playerInputSwitch++;
                 } catch (InputMismatchException e) {
                     System.out.println("Input number");
                 } catch (IllegalArgumentException e) {

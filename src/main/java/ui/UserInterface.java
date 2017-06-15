@@ -12,7 +12,7 @@ public class UserInterface {
 
         Scanner rowAndColIn = new Scanner(System.in);
         int num = rowAndColIn.nextInt();
-        if (num > boardSize) {
+        if (num > boardSize || num < 1) {
             throw new IllegalArgumentException();
         }
         return num;
