@@ -1,20 +1,44 @@
 package ui;
 
+import java.text.MessageFormat;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
  * Created by joanna on 14.06.17.
  */
 public class UserInterface {
+    Scanner numberIn;
 
+    public UserInterface() {
+        numberIn = new Scanner(System.in);
+    }
+    public int getNumberFromPlayer(int maxNumber) {
+        int num = 0;
+        while (num == 0) {
+            try {
+                num = numberIn.nextInt();
 
-    public int getNumberFromPlayer(int boardSize) {
+                if (num > maxNumber) {
+                    throw new IllegalArgumentException();
+                }
+                numberIn.nextLine();
 
-        Scanner rowAndColIn = new Scanner(System.in);
-        int num = rowAndColIn.nextInt();
-        if (num > boardSize) {
-            throw new IllegalArgumentException();
+            } catch (InputMismatchException e) {
+                System.out.println("Input number");
+                numberIn.nextLine();
+            }
         }
+
         return num;
+    }
+
+    public void showRowColRequest(String rowOrCol, int boardSize) {
+        System.out.println(MessageFormat.format("Enter {0} number (between 1 and {1})", rowOrCol, boardSize));
+    }
+
+    public void showNotEmptyCellInfo(int row, int col) {
+        System.out.println("Cell " + row + " " + col + " is not empty!");
+        System.out.println("Try again");
     }
 }

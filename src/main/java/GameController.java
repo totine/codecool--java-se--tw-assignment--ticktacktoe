@@ -1,8 +1,6 @@
 
 import exceptions.OccupiedCellException;
-import model.Game;
-import model.GameState;
-import model.Seed;
+import model.*;
 import ui.UserInterface;
 
 import java.util.Arrays;
@@ -14,9 +12,14 @@ public class GameController {
     int currentMoveRow;
     int currentMoveCol;
     int gameSize;
+    GameMode gameMode;
+    Player firstPlayer;
+    Player secondPlayer;
+    Player currentPlayer;
+
 
     public void initGame() {
-        gameSize = 4;
+        gameSize = 3;
         game = new Game();
         game.initGame(gameSize);
         ui = new UserInterface();
@@ -24,6 +27,32 @@ public class GameController {
     }
 
     public void chooseGameMode() {
+        System.out.println("Choose game mode:");
+        System.out.println("1. Player vs. Player");
+        System.out.println("2. Player vs. Computer - easy");
+        System.out.println("3. Player vs. Computer - hard");
+        int optionCount = 3;
+        int choosenGameMode = ui.getNumberFromPlayer(optionCount);
+        switch (choosenGameMode) {
+            case 1:
+                gameMode = GameMode.PLAYER_VS_PLAYER;
+                firstPlayer = new PlayerReal(game.getCurrentPlayer());
+                secondPlayer = new PlayerReal(game.getOppositePlayer());
+                currentPlayer = firstPlayer;
+                break;
+            case 2:
+                gameMode = GameMode.PLAYER_VS_AI_EASY;
+                firstPlayer = new PlayerReal(game.getCurrentPlayer());
+                secondPlayer = new PlayerAIEasy(game.getOppositePlayer());
+                currentPlayer = firstPlayer;
+                break;
+            case 3:
+                gameMode = GameMode.PLAYER_VS_AI_HARD;
+                firstPlayer = new PlayerReal(game.getCurrentPlayer());
+                secondPlayer = new PlayerAIHard(game.getOppositePlayer());
+                currentPlayer = firstPlayer;
+                break;
+        }
 
     }
 
@@ -37,42 +66,16 @@ public class GameController {
     }
 
     public void getInputFromPlayer() {
-        boolean isCorrectInput = false;
-
-        while (!isCorrectInput) {
-            System.out.println("Input row:");
-            int a = 0;
-            while (a == 0) {
+            PlayerInput playerInput = currentPlayer.getInputFromPlayer(game.getBoard());
+            boolean isCorrectInput = false;
+            while (!isCorrectInput) {
                 try {
-                    currentMoveRow = ui.getNumberFromPlayer(gameSize);
-                    a = 1;
-                } catch (InputMismatchException e) {
-                    System.out.println("Input number");
-                } catch (IllegalArgumentException e) {
-                    System.out.println("Number must be less than " + gameSize);
+                    game.updateGameState(playerInput.getSeed(), playerInput.getRow(), playerInput.getCol());
+                    isCorrectInput = true;
+                } catch (OccupiedCellException e) {
+                    System.out.println("Current cell is not empty, try again");;
                 }
-            }
-            a = 0;
-            System.out.println("Input col:");
-            while (a == 0) {
-                try {
-                    currentMoveCol = ui.getNumberFromPlayer(gameSize);
-                    a = 1;
-                } catch (InputMismatchException e) {
-                    System.out.println("Input number");
-                } catch (IllegalArgumentException e) {
-                    System.out.println("Number must be less than " + gameSize);
-                }
-            }
-            try {
-                game.updateGameState(game.getCurrentPlayer(), currentMoveRow, currentMoveCol);
-                isCorrectInput = true;
-            }
-            catch (OccupiedCellException e) {
-                System.out.println("Cell is not empty, try again!");
-            }
-
-        }
+    }
     }
 
     public void showGameStatus() {
@@ -84,4 +87,13 @@ public class GameController {
 
     public void showGameResults() {
     }
+
+    public void setPlayers() {
+
+    }
+
+    public void switchPlayers() {
+        currentPlayer = firstPlayer.getSeed().equals(game.getCurrentPlayer()) ? firstPlayer : secondPlayer;
+    }
 }
+

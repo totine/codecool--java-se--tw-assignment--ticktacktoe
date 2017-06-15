@@ -69,6 +69,23 @@ public class Board {
         return true;
     }
 
+    public int getBoardSize() {
+        return boardSize;
+    }
+
+    public boolean isEmptyCell(int row, int col) {
+        return !(row == 0 & col == 0) && cells[row-1][col-1].getContent().equals(Seed.EMPTY);
+    }
+
+    public boolean isClear() {
+        for (int i=0;i<boardSize;i++ ) {
+            if (Arrays.stream(cells[i]).anyMatch(x -> !x.getContent().equals(Seed.EMPTY)))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 
 //    public boolean isDraw() {
 //        return
@@ -77,6 +94,11 @@ public class Board {
 //    private Seed[] toOneDimensionArray(Seed[][] arr) {
 //        Seed[]
 //    }
+
+
+    public BoardTriples getBoardTriples() {
+        return boardTriples;
+    }
 }
 
 class BoardTriples {

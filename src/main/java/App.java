@@ -24,9 +24,11 @@ public class App {
         //while (isAppActive) {
             gameController.initGame();
             gameController.chooseGameMode();
+            gameController.setPlayers();
             while (!gameController.getIsGameEnd()) {
                 gameController.showCurrentPlayer();
                 gameController.getInputFromPlayer();
+                gameController.switchPlayers();
                 gameController.showGameStatus();
             }
             gameController.showGameResults();

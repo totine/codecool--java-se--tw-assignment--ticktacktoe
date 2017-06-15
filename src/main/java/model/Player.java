@@ -1,12 +1,9 @@
 package model;
 
-public class Player {
+public abstract class Player {
     String name;
     Seed seed;
-
-    public Player(String name) {
-        this.name = name;
-    }
+    PlayerInput playerInput;
 
     public String getName() {
         return name;
@@ -20,5 +17,9 @@ public class Player {
         if (seed == Seed.EMPTY)
             throw new IllegalArgumentException();
         this.seed = seed;
+    }
+
+    public PlayerInput getInputFromPlayer(Board board) {
+        return null;
     }
 }

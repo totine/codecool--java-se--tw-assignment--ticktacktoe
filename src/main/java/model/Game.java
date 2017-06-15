@@ -48,4 +48,8 @@ public class Game {
         }
         currentPlayer = seed == Seed.CROSS ? Seed.NOUGHT : Seed.CROSS;
     }
+
+    public Seed getOppositePlayer() {
+        return currentPlayer.equals(Seed.CROSS) ? Seed.NOUGHT : Seed.CROSS;
+    }
 }
