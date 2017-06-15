@@ -19,13 +19,14 @@ public class UserInterface {
             try {
                 num = numberIn.nextInt();
 
-                if (num > maxNumber) {
+                if (num > maxNumber || num < 1) {
                     throw new IllegalArgumentException();
                 }
                 numberIn.nextLine();
 
             } catch (InputMismatchException e) {
-                System.out.println("Input number");
+                Printer printer = new Printer();
+                printer.mismatchExceptionMessage();
                 numberIn.nextLine();
             }
         }

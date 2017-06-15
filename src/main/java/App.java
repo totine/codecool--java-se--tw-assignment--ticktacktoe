@@ -17,14 +17,14 @@ public class App {
     }
 
     private void askToContinue() {
+
         isAppActive = false;
     }
 
     private void gameInit() {
-        //while (isAppActive) {
+        while (isAppActive) {
             gameController.initGame();
             gameController.chooseGameMode();
-            gameController.setPlayers();
             while (!gameController.getIsGameEnd()) {
                 gameController.showCurrentPlayer();
                 gameController.getInputFromPlayer();
@@ -32,7 +32,7 @@ public class App {
                 gameController.showGameStatus();
             }
             gameController.showGameResults();
-        //    askToContinue();
-      //  }
+            askToContinue();
+        }
     }
 }
