@@ -1,25 +1,17 @@
 
 import exceptions.OccupiedCellException;
-import model.Game;
-import model.GameState;
-import model.Seed;
-import ui.Printer;
 import model.*;
+import ui.Printer;
 import ui.UserInterface;
 
-import java.util.Arrays;
-import java.util.InputMismatchException;
-
 public class GameController {
-    Game game;
-    UserInterface ui;
-    int currentMoveRow;
-    int currentMoveCol;
-    int gameSize;
-    GameMode gameMode;
-    Player firstPlayer;
-    Player secondPlayer;
-    Player currentPlayer;
+    private Game game;
+    private UserInterface ui;
+    private int gameSize;
+    private GameMode gameMode;
+    private Player firstPlayer;
+    private Player secondPlayer;
+    private Player currentPlayer;
 
     Printer printer;
 
@@ -33,10 +25,7 @@ public class GameController {
     }
 
     public void chooseGameMode() {
-        System.out.println("Choose game mode:");
-        System.out.println("1. Player vs. Player");
-        System.out.println("2. Player vs. Computer - easy");
-        System.out.println("3. Player vs. Computer - hard");
+        printer.askForGameMode();
         int optionCount = 3;
         int choosenGameMode = ui.getNumberFromPlayer(optionCount);
         gameMode = GameMode.getByOptionNumber(choosenGameMode);
@@ -79,6 +68,10 @@ public class GameController {
     }
 
     public void showGameResults() {
+        if (game.getCurrentState().equals(GameState.DRAW))
+            printer.drawDisplay();
+        else
+            printer.winnerDisplay(game.getOppositePlayer());
     }
 
 

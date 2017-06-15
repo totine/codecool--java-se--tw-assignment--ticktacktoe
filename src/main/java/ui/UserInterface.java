@@ -4,11 +4,8 @@ import java.text.MessageFormat;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-/**
- * Created by joanna on 14.06.17.
- */
 public class UserInterface {
-    Scanner numberIn;
+    private Scanner numberIn;
 
     public UserInterface() {
         numberIn = new Scanner(System.in);

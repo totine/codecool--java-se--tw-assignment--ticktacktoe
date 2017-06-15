@@ -1,9 +1,6 @@
-/**
- * Created by joanna on 14.06.17.
- */
 public class App {
-    GameController gameController;
-    boolean isAppActive;
+    private GameController gameController;
+    private boolean isAppActive;
 
     private App() {
         gameController = new GameController();

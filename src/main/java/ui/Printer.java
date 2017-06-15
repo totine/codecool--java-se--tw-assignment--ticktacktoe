@@ -46,4 +46,15 @@ public class Printer {
     public void winnerDisplay(){
         System.out.println("draw");
     }
+
+    public void askForGameMode() {
+        System.out.println("Choose game mode:");
+        System.out.println("1. Player vs. Player");
+        System.out.println("2. Player vs. Computer - easy");
+        System.out.println("3. Player vs. Computer - hard");
+    }
+
+    public void drawDisplay() {
+        System.out.println("It's draw!");
+    }
 }

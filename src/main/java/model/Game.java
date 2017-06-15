@@ -2,7 +2,6 @@ package model;
 
 
 import exceptions.OccupiedCellException;
-import ui.Printer;
 
 public class Game {
     private Board board;
@@ -35,16 +34,16 @@ public class Game {
     }
 
     public void updateGameState(Seed seed, int row, int col) throws OccupiedCellException {
-        Printer printer = new Printer();
+
 
         board.update(seed, row, col);
         if (board.hasWon(seed, row, col)) {
             currentState = seed==Seed.CROSS ? GameState.CROSS_WON : GameState.NOUGHT_WON;
-            printer.winnerDisplay(seed);
+
         }
         else if (board.isDraw()) {
             currentState = GameState.DRAW;
-            printer.winnerDisplay();
+
         }
         currentPlayer = seed == Seed.CROSS ? Seed.NOUGHT : Seed.CROSS;
     }
