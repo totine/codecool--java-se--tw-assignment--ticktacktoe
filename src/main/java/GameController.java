@@ -3,6 +3,7 @@ import exceptions.OccupiedCellException;
 import model.Game;
 import model.GameState;
 import model.Seed;
+import ui.Printer;
 import ui.UserInterface;
 
 import java.util.Arrays;
@@ -14,12 +15,14 @@ public class GameController {
     int currentMoveRow;
     int currentMoveCol;
     int gameSize;
+    Printer printer;
 
     public void initGame() {
         gameSize = 4;
         game = new Game();
         game.initGame(gameSize);
         ui = new UserInterface();
+        printer = new Printer();
 
     }
 
@@ -33,7 +36,7 @@ public class GameController {
     }
 
     public void showCurrentPlayer() {
-        System.out.println("Current player: " + game.getCurrentPlayer());
+        printer.currentPlayerDislay(game);
     }
 
     public void getInputFromPlayer() {
@@ -42,21 +45,22 @@ public class GameController {
         while (!isCorrectInput) {
             boolean dimensionInputSwitch = true;
             int playerInputSwitch = 0;
+
             while (playerInputSwitch != 2) {
                 try {
                    if(dimensionInputSwitch) {
-                       System.out.println("Input row:");
+                       printer.askForRowInput();
                        currentMoveRow = ui.getNumberFromPlayer(gameSize);
                        dimensionInputSwitch = false;
                    } else {
-                       System.out.println("Input col:");
+                       printer.askForColInput();
                        currentMoveCol = ui.getNumberFromPlayer(gameSize);
                    }
                     playerInputSwitch++;
                 } catch (InputMismatchException e) {
-                    System.out.println("Input number");
+                    printer.mismatchExceptionMessage();
                 } catch (IllegalArgumentException e) {
-                    System.out.println("Number must be less than " + gameSize);
+                    printer.illegalArgumentExceptionMessage(gameSize);
                 }
             }
             try {
@@ -64,17 +68,14 @@ public class GameController {
                 isCorrectInput = true;
             }
             catch (OccupiedCellException e) {
-                System.out.println("Cell is not empty, try again!");
+                printer.occupiedCellExceptionMessage();
             }
 
         }
     }
 
     public void showGameStatus() {
-        for (int i = 0; i < gameSize; i++)
-        System.out.println(Arrays.asList(Arrays.stream(game.getBoard().getCells()[i]).map(x -> x.getContent().visualisation()).toArray()));
-
-
+        printer.gameBoardDisplay(game, gameSize);
     }
 
     public void showGameResults() {
