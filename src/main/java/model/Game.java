@@ -5,13 +5,11 @@ import exceptions.OccupiedCellException;
 import ui.Printer;
 
 public class Game {
-    Board board;
-    GameState currentState;
-    Seed currentPlayer;
-    int gameSize;
+    private Board board;
+    private GameState currentState;
+    private Seed currentPlayer;
 
     public void initGame(int gameSize) {
-        this.gameSize = gameSize;
         board = new Board(gameSize);
         board.init();
         currentPlayer = randomPlayer();

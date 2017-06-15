@@ -6,6 +6,7 @@ import model.Seed;
 import java.util.Arrays;
 
 public class Printer {
+
     public void currentPlayerDislay(Game game){
         System.out.println("Current player: " + game.getCurrentPlayer());
     }
