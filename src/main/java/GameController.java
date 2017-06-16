@@ -28,8 +28,9 @@ public class GameController {
 
     public void chooseGameMode() {
         printer.askForGameMode();
-        int optionCount = 3;
-        int choosenGameMode = ui.getNumberFromPlayer(optionCount);
+        int minInput = 1;
+        int maxInput = 3;
+        int choosenGameMode = ui.getInputFromTo(minInput, maxInput);
         gameMode = GameMode.getByOptionNumber(choosenGameMode);
     }
 

@@ -1,5 +1,6 @@
 package model;
 
+import ui.Printer;
 import ui.UserInterface;
 
 
