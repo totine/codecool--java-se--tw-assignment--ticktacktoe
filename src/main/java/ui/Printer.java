@@ -57,6 +57,7 @@ public class Printer {
 
     public void askForGameBoardSize(){
         System.out.println("Insert game board size you want to play on, from 3 to 10:");
+        System.out.println("Note: hard mode is only for size 3 board");
     }
 
     public void askForNumberBetween(int minNumber, int maxNumber){

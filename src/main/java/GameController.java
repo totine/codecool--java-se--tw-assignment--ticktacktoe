@@ -29,7 +29,7 @@ public class GameController {
     void chooseGameMode() {
         printer.askForGameMode();
         int minInput = 1;
-        int maxInput = 3;
+        int maxInput = gameSize > 3 ? 2 : 3;
         int choosenGameMode = ui.getInputFromTo(minInput, maxInput);
         gameMode = GameMode.getByOptionNumber(choosenGameMode);
     }
@@ -80,7 +80,7 @@ public class GameController {
 
     private int chooseGameBoardSize() {
         int minInput = 3;
-        int maxInput = 10;
+        int maxInput = 15;
         printer.askForGameBoardSize();
         return ui.getInputFromTo(minInput,maxInput);
     }
