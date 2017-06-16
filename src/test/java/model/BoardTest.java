@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Nested;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Matchers.intThat;
-import static org.mockito.Mockito.mock;
 
 class BoardTest {
     private Board board;
@@ -46,7 +44,6 @@ class BoardTest {
                     () -> assertEquals(3, board.getCells()[2].length));
         }
 
-        //
         @Test
         void testInit_AfterCall_AllCellsAreEmpty() {
             board.init();
@@ -95,7 +92,6 @@ class BoardTest {
         void testIsClear_ReturnFalse(){
             board.init();
             board.getCells()[2][2].setContent(Seed.CROSS);
-
             assertEquals(false , board.isClear());
         }
 
@@ -136,33 +132,24 @@ class BoardTest {
                 assertEquals(true, board.hasWon(Seed.CROSS, 2, 3));
             }
 
-
             @Test
             void testHasWon_IfWinningConditionMetInRowMiddle() {
-
                 board.getCells()[0][0].setContent(Seed.CROSS);
                 board.getCells()[0][1].setContent(Seed.CROSS);
-
                 assertEquals(true, board.hasWon(Seed.CROSS, 1, 3));
             }
 
-
             @Test
             void testHasWon_IfWinningConditionMetInCol() {
-
                 board.getCells()[0][0].setContent(Seed.CROSS);
                 board.getCells()[1][0].setContent(Seed.CROSS);
-
                 assertEquals(true, board.hasWon(Seed.CROSS, 3, 1));
             }
 
-
             @Test
             void testHasWon_IfWinningConditionMetInDiagonalMiddle() {
-
                 board.getCells()[1][1].setContent(Seed.CROSS);
                 board.getCells()[1][2].setContent(Seed.CROSS);
-
                 assertEquals(true, board.hasWon(Seed.CROSS, 1, 3));
             }
         }
