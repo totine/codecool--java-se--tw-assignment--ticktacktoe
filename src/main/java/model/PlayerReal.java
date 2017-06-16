@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.IncorrectRowOrColInputException;
+import ui.Printer;
 import ui.UserInterface;
 
 
@@ -35,7 +37,8 @@ public class PlayerReal extends Player {
                 isCorrectRowOrColNumber = true;
 
             } catch (IllegalArgumentException e) {
-                System.out.println("Number must be less than " + boardSize);
+                Printer printer = new Printer();
+                printer.illegalArgumentExceptionMessage(boardSize);
             }
         }
 
