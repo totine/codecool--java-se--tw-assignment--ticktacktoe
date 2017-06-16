@@ -73,7 +73,7 @@ public class Printer {
         System.out.println("Try again");
     }
 
-    void rowColRequestDisplay(String rowOrCol, int boardSize) {
+    public void rowColRequestDisplay(String rowOrCol, int boardSize) {
         System.out.println(MessageFormat.format("Enter {0} number (between 1 and {1})", rowOrCol, boardSize));
     }
 }
