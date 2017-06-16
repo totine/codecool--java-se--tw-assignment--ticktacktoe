@@ -1,6 +1,5 @@
 package ui;
 
-import java.text.MessageFormat;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
