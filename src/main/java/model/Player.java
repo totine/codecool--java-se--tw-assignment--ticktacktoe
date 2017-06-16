@@ -1,13 +1,7 @@
 package model;
 
 public abstract class Player {
-    String name;
     Seed seed;
-    PlayerInput playerInput;
-
-    public String getName() {
-        return name;
-    }
 
     public Seed getSeed() {
         return seed;

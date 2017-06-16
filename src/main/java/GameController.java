@@ -16,7 +16,7 @@ public class GameController {
     private Player secondPlayer;
     private Player currentPlayer;
 
-    Printer printer;
+    private Printer printer;
 
     void initGame() {
         printer = new Printer();
@@ -57,7 +57,7 @@ public class GameController {
                 game.updateGameState(playerInput.getSeed(), playerInput.getRow(), playerInput.getCol());
                 isCorrectInput = true;
             } catch (OccupiedCellException e) {
-                System.out.println("Current cell is not empty, try again");;
+                printer.occupiedCellExceptionMessage();
             }
     }
     }
@@ -86,7 +86,7 @@ public class GameController {
     }
 
     boolean playAnotherGame() {
-        System.out.println("Want to play another game? Pick 1 = YES, 2 = NO");
+        printer.askToPlayAgain();
         int minInput = 1;
         int maxInput = 2;
         int playAgainSwich = ui.getInputFromTo(minInput, maxInput);

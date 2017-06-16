@@ -62,4 +62,17 @@ public class Printer {
     public void askForNumberBetween(int minNumber, int maxNumber){
         System.out.println(MessageFormat.format("Enter number (between {0} and {1})", minNumber, maxNumber));
     }
+
+    public void askToPlayAgain() {
+        System.out.println("Want to play another game? Pick 1 = YES, 2 = NO");
+    }
+
+    void notEmptyCellMessage(int row, int col) {
+        System.out.println("Cell " + row + " " + col + " is not empty!");
+        System.out.println("Try again");
+    }
+
+    void rowColRequestDisplay(String rowOrCol, int boardSize) {
+        System.out.println(MessageFormat.format("Enter {0} number (between 1 and {1})", rowOrCol, boardSize));
+    }
 }

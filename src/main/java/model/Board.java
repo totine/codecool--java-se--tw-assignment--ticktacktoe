@@ -27,8 +27,10 @@ public class Board {
     }
 
     void update(Seed seed, int row, int col) throws OccupiedCellException {
-        if (!cells[row-1][col-1].getContent().equals(Seed.EMPTY))
-            throw new OccupiedCellException("Cell is not empty!");
+        if (!cells[row-1][col-1].getContent().equals(Seed.EMPTY)) {
+            String errorMessage = "Cell is not empty!";
+            throw new OccupiedCellException(errorMessage);
+        }
         cells[row-1][col-1].setContent(seed);
     }
 
@@ -41,8 +43,9 @@ public class Board {
         Seed[] pattern = new Seed[boardSize];
         Arrays.fill(pattern, seed);
         if (Arrays.equals(boardTriples.getCol(col), pattern)
-                || Arrays.equals(boardTriples.getRow(row), pattern))
-              return true;
+                || Arrays.equals(boardTriples.getRow(row), pattern)) {
+            return true;
+        }
         if (row == col) {
             if (Arrays.equals(boardTriples.getDiagFromLeftUp(), pattern)) {
                 return true;
@@ -58,8 +61,9 @@ public class Board {
 
     boolean isDraw() {
         for (int i = 0; i<boardSize; i++) {
-            if (Arrays.stream(cells[i]).anyMatch(x -> x.getContent().equals(Seed.EMPTY)))
+            if (Arrays.stream(cells[i]).anyMatch(x -> x.getContent().equals(Seed.EMPTY))) {
                 return false;
+            }
         }
         return true;
     }

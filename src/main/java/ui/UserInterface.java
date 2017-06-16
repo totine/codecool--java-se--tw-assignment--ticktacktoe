@@ -32,12 +32,13 @@ public class UserInterface {
     }
 
     public void showRowColRequest(String rowOrCol, int boardSize) {
-        System.out.println(MessageFormat.format("Enter {0} number (between 1 and {1})", rowOrCol, boardSize));
+        Printer printer = new Printer();
+        printer.rowColRequestDisplay(rowOrCol, boardSize);
     }
 
     public void showNotEmptyCellInfo(int row, int col) {
-        System.out.println("Cell " + row + " " + col + " is not empty!");
-        System.out.println("Try again");
+        Printer printer = new Printer();
+        printer.notEmptyCellMessage(row, col);
     }
 
     public int getInputFromTo(int minInput, int maxInput) {
