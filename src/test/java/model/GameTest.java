@@ -33,7 +33,6 @@ class GameTest {
         game.updateGameState(Seed.CROSS, 1, 1);
         game.updateGameState(Seed.CROSS, 2, 1);
         game.updateGameState(Seed.CROSS, 3, 1);
-
         assertEquals(GameState.CROSS_WON, game.getCurrentState());
     }
 

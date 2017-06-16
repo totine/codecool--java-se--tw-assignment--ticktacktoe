@@ -13,10 +13,8 @@ import static org.mockito.Mockito.mock;
 
 class BoardTest {
     private Board board;
-    private Cell array[][];
     private int columns;
     private int rows;
-    private Cell cell;
 
     @Nested
     @DisplayName("Init Tests")
@@ -124,19 +122,18 @@ class BoardTest {
 
             @Test
             void testHasWon_IfSeedCountIsLessThanThree_returnsFalse() {
-
                 board.getCells()[2][2].setContent(Seed.CROSS);
-
                 assertEquals(false, board.hasWon(Seed.CROSS, 1, 1));
             }
 
             @Test
             void testHasWon_IfWinningConditionMetInRow() {
-
+                board.getCells()[1][0].setContent(Seed.CROSS);
+                board.getCells()[2][0].setContent(Seed.NOUGHT);
                 board.getCells()[1][1].setContent(Seed.CROSS);
-                board.getCells()[1][2].setContent(Seed.CROSS);
-
-                assertEquals(true, board.hasWon(Seed.CROSS, 1, 3));
+                board.getCells()[2][1].setContent(Seed.CROSS);
+                board.getCells()[1][0].setContent(Seed.CROSS);
+                assertEquals(true, board.hasWon(Seed.CROSS, 2, 3));
             }
 
 
