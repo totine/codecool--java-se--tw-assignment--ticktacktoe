@@ -16,12 +16,10 @@ public class UserInterface {
         while (num == 0) {
             try {
                 num = numberIn.nextInt();
-
                 if (num > maxNumber || num < 1) {
                     throw new IllegalArgumentException();
                 }
                 numberIn.nextLine();
-
             } catch (InputMismatchException e) {
                 Printer printer = new Printer();
                 printer.mismatchExceptionMessage();
