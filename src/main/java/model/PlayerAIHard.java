@@ -1,5 +1,7 @@
 package model;
 
+import ui.Printer;
+
 import java.util.Arrays;
 
 public class PlayerAIHard extends PlayerAIEasy {
@@ -26,8 +28,8 @@ public class PlayerAIHard extends PlayerAIEasy {
         } else {
             playerInput = getRandomInput(board);
         }
-        System.out.println(playerInput.getRow());
-        System.out.println(playerInput.getCol());
+        Printer printer = new Printer();
+        printer.artificialInteligenceMoveDisplay(playerInput.getRow(), playerInput.getCol());
         return playerInput;
     }
 

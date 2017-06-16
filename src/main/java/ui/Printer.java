@@ -12,16 +12,10 @@ public class Printer {
         System.out.println("Current player: " + game.getCurrentPlayer());
     }
 
-    public void askForRowInput(){
-        System.out.println("Input row:");
-    }
-
-    public void askForColInput(){
-        System.out.println("Input col:");
-    }
     void mismatchExceptionMessage() {
         System.out.println("Input number");
     }
+
     public void illegalArgumentExceptionMessage(int gameSize){
         System.out.println("Please provide number from 1 to " + gameSize);
     }
@@ -75,5 +69,10 @@ public class Printer {
 
     public void rowColRequestDisplay(String rowOrCol, int boardSize) {
         System.out.println(MessageFormat.format("Enter {0} number (between 1 and {1})", rowOrCol, boardSize));
+    }
+
+    public void artificialInteligenceMoveDisplay(int row, int col) {
+        System.out.println(row);
+        System.out.println(col);
     }
 }
