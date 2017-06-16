@@ -75,4 +75,8 @@ public class Printer {
         System.out.println(row);
         System.out.println(col);
     }
+
+    public void getEmptyCellDisplay(int i) {
+        System.out.println(i);
+    }
 }

@@ -53,10 +53,11 @@ public class PlayerAIHard extends PlayerAIEasy {
         return new PlayerInput(seed, rowToInput, colToInput);
         }
 
-    private int getEmptyCell(Seed[] cellsline) {
-        for (int i=0;i<cellsline.length;i++) {
-            if (cellsline[i].equals(Seed.EMPTY)) {
-                System.out.println(i+1);
+    private int getEmptyCell(Seed[] cellsLine) {
+        for (int i=0; i<cellsLine.length; i++) {
+            if (cellsLine[i].equals(Seed.EMPTY)) {
+                Printer printer = new Printer();
+                printer.getEmptyCellDisplay(i+1);
                 return i+1;
             }
         }
