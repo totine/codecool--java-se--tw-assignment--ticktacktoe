@@ -40,8 +40,8 @@ public class Board {
 
         Seed[] pattern = new Seed[boardSize];
         Arrays.fill(pattern, seed);
-        if (Arrays.equals(boardTriples.getCol(col), pattern) ||
-                Arrays.equals(boardTriples.getRow(row), pattern))
+        if (Arrays.equals(boardTriples.getCol(col), pattern)
+                || Arrays.equals(boardTriples.getRow(row), pattern))
               return true;
         if (row == col) {
             if (Arrays.equals(boardTriples.getDiagFromLeftUp(), pattern)) {
@@ -49,9 +49,9 @@ public class Board {
             }
         }
         if (col == (boardSize+1)-row){
-                if (Arrays.equals(boardTriples.getDiagFromLeftDown(), pattern)) {
-                    return true;
-                }
+            if (Arrays.equals(boardTriples.getDiagFromLeftDown(), pattern)) {
+                return true;
+            }
         }
         return false;
     }

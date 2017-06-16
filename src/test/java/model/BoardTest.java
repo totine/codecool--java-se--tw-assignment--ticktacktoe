@@ -24,24 +24,7 @@ class BoardTest {
         @BeforeEach
         void setUp() {
             board = new Board(3);
-
-//        int columns = 3;
-//        int rows = 3;
-//        Cell array[][] = new Cell[columns][rows];
-//        for (int col = 0; col < columns; col++) {
-//            for (int row = 0; row < rows; row++) {
-//                array[col][row] = cell;
-//            }
         }
-
-//        for (Cell col []: array) {
-//            System.out.println(col.length);
-//            for (Cell row : col) {
-//                System.out.println(row.toString());
-//
-//            }
-//        }
-
 
         @Test
         void testGetCells_returnsCells() {
@@ -84,6 +67,38 @@ class BoardTest {
                     assertEquals(i + 1, board.getCells()[i][j].getRow());
                 }
             }
+        }
+
+        @Test
+        void testGetBoardSize(){
+            int expectedBoardSize = 3;
+            assertEquals(expectedBoardSize, board.getBoardSize());
+        }
+
+        @Test
+        void testIsEmptyCell(){
+            board.init();
+            assertEquals(true, board.isEmptyCell(1,1));
+        }
+
+        @Test
+        void testGetBoardTriples(){
+            board.init();
+            assertEquals(BoardTriples.class, board.getBoardTriples().getClass());
+        }
+
+        @Test
+        void testIsClear_ReturnTrue(){
+            board.init();
+            assertEquals(true, board.isClear());
+        }
+
+        @Test
+        void testIsClear_ReturnFalse(){
+            board.init();
+            board.getCells()[2][2].setContent(Seed.CROSS);
+
+            assertEquals(false , board.isClear());
         }
 
         @Nested
@@ -154,19 +169,5 @@ class BoardTest {
                 assertEquals(true, board.hasWon(Seed.CROSS, 1, 3));
             }
         }
-
-//    @Test // winning conditions needed
-//    void test_isDraw(){
-//        for (int col = 0; col < columns; col++) {
-//            for (int row = 0; row < rows; row++) {
-//                Cell expectedCell = array[col][row];
-//                Boolean isExpected = (!expectedCell.getContent().equals(Seed.EMPTY)); // if not EMPTY = true
-//                Cell actualCell = board.getCells()[col][row];
-//                Boolean isActual = (!actualCell.getContent().equals(Seed.EMPTY)); // if not EMPTY = true
-//
-//                assertEquals(isExpected, isActual);
-//            }
-//        }
-//    }
     }
 }
