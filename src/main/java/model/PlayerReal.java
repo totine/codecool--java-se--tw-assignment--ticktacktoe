@@ -33,7 +33,6 @@ public class PlayerReal extends Player {
                 ui.showRowColRequest(rowOrColName, boardSize);
                 rowOrColNumber = ui.getNumberFromPlayer(boardSize);
                 isCorrectRowOrColNumber = true;
-
             } catch (IllegalArgumentException e) {
                 Printer printer = new Printer();
                 printer.illegalArgumentExceptionMessage(boardSize);
