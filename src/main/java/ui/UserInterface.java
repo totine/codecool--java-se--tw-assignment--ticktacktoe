@@ -13,6 +13,7 @@ public class UserInterface {
     public UserInterface() {
         numberIn = new Scanner(System.in);
     }
+
     public int getNumberFromPlayer(int maxNumber) {
         int num = 0;
         while (num == 0) {
@@ -41,5 +42,29 @@ public class UserInterface {
     public void showNotEmptyCellInfo(int row, int col) {
         System.out.println("Cell " + row + " " + col + " is not empty!");
         System.out.println("Try again");
+    }
+
+    public int getInputFromTo(int minInput, int maxInput) {
+        int num = 0;
+        boolean checkNumber = true;
+        while (checkNumber) {
+            try {
+                num = numberIn.nextInt();
+
+                if (num > maxInput || num < minInput) {
+                    throw new IllegalArgumentException();
+                }
+                checkNumber = false;
+            } catch (InputMismatchException e) {
+                Printer printer = new Printer();
+                printer.mismatchExceptionMessage();
+                numberIn.nextLine();
+            } catch (IllegalArgumentException e) {
+                Printer printer = new Printer();
+                printer.askForNumberBetween(minInput, maxInput);
+                numberIn.nextLine();
+            }
+        }
+        return num;
     }
 }

@@ -6,9 +6,6 @@ import ui.UserInterface;
 
 import java.util.InputMismatchException;
 
-/**
- * Created by joanna on 15.06.17.
- */
 public class PlayerReal extends Player {
     UserInterface ui;
 

@@ -3,6 +3,7 @@ package ui;
 import model.Game;
 import model.Seed;
 
+import java.text.MessageFormat;
 import java.util.Arrays;
 
 public class Printer {
@@ -45,5 +46,13 @@ public class Printer {
 
     public void winnerDisplay(){
         System.out.println("draw");
+    }
+
+    public void askForGameBoardSize(){
+        System.out.println("Insert game board size you want to play on, from 3 to 10:");
+    }
+
+    public void askForNumberBetween(int minNumber, int maxNumber){
+        System.out.println(MessageFormat.format("Enter number (between {0} and {1})", minNumber, maxNumber));
     }
 }

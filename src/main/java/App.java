@@ -1,27 +1,17 @@
-/**
- * Created by joanna on 14.06.17.
- */
 public class App {
-    GameController gameController;
-    boolean isAppActive;
+    private GameController gameController;
+    private boolean isAppActive;
 
-    private App() {
+    App() {
         gameController = new GameController();
         isAppActive = true;
     }
 
-    public static void main(String[] args) {
-        App app = new App();
-        app.gameInit();
-
-    }
-
     private void askToContinue() {
-
-        isAppActive = false;
+        isAppActive = gameController.playAnotherGame();
     }
 
-    private void gameInit() {
+    void gameInit() {
         while (isAppActive) {
             gameController.initGame();
             gameController.chooseGameMode();
