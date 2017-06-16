@@ -19,7 +19,7 @@ public class Printer {
     public void askForColInput(){
         System.out.println("Input col:");
     }
-    public void mismatchExceptionMessage() {
+    void mismatchExceptionMessage() {
         System.out.println("Input number");
     }
     public void illegalArgumentExceptionMessage(int gameSize){

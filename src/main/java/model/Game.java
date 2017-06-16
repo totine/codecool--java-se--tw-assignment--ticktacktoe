@@ -13,7 +13,6 @@ public class Game {
         board.init();
         currentPlayer = randomPlayer();
         currentState = GameState.PLAYING;
-        
     }
 
     private Seed randomPlayer() {
@@ -34,16 +33,12 @@ public class Game {
     }
 
     public void updateGameState(Seed seed, int row, int col) throws OccupiedCellException {
-
-
         board.update(seed, row, col);
         if (board.hasWon(seed, row, col)) {
             currentState = seed==Seed.CROSS ? GameState.CROSS_WON : GameState.NOUGHT_WON;
-
         }
         else if (board.isDraw()) {
             currentState = GameState.DRAW;
-
         }
         currentPlayer = seed == Seed.CROSS ? Seed.NOUGHT : Seed.CROSS;
     }

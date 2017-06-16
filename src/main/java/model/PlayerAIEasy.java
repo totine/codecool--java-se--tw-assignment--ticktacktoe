@@ -1,15 +1,10 @@
 package model;
 
-/**
- * Created by joanna on 15.06.17.
- */
 public class PlayerAIEasy extends Player {
 
-    public PlayerAIEasy() {
+    PlayerAIEasy() {}
 
-    }
-
-    public PlayerAIEasy(Seed seed) {
+    PlayerAIEasy(Seed seed) {
         this.seed = seed;
     }
 
@@ -18,7 +13,7 @@ public class PlayerAIEasy extends Player {
         return getRandomInput(board);
     }
 
-    protected PlayerInput getRandomInput(Board board) {
+    PlayerInput getRandomInput(Board board) {
         int row = (int) (Math.random()*board.getBoardSize()+1);
         int col = (int) (Math.random()*board.getBoardSize()+1);
         while (!board.isEmptyCell(row, col)) {

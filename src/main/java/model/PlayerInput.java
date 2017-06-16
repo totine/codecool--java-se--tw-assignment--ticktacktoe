@@ -1,8 +1,5 @@
 package model;
 
-/**
- * Created by joanna on 15.06.17.
- */
 public class PlayerInput {
     Seed seed;
     int row;

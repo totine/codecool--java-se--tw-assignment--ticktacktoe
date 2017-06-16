@@ -18,7 +18,7 @@ public class GameController {
 
     Printer printer;
 
-    public void initGame() {
+    void initGame() {
         printer = new Printer();
         ui = new UserInterface();
         this.gameSize = chooseGameBoardSize();
@@ -26,7 +26,7 @@ public class GameController {
         game.initGame(gameSize);
     }
 
-    public void chooseGameMode() {
+    void chooseGameMode() {
         printer.askForGameMode();
         int minInput = 1;
         int maxInput = 3;
@@ -34,43 +34,39 @@ public class GameController {
         gameMode = GameMode.getByOptionNumber(choosenGameMode);
     }
 
-    public void setPlayers() {
-
-           firstPlayer = gameMode.getPlayer();
-           secondPlayer = new PlayerReal(Seed.NOUGHT);
-           currentPlayer = firstPlayer.getSeed().equals(game.getCurrentPlayer()) ? firstPlayer : secondPlayer;
-
-
-
+    void setPlayers() {
+        firstPlayer = gameMode.getPlayer();
+        secondPlayer = new PlayerReal(Seed.NOUGHT);
+        currentPlayer = firstPlayer.getSeed().equals(game.getCurrentPlayer()) ? firstPlayer : secondPlayer;
     }
 
-    public boolean getIsGameEnd() {
-    return game.getCurrentState().equals(GameState.DRAW) || game.getCurrentState().equals(GameState.NOUGHT_WON)
+    boolean getIsGameEnd() {
+        return game.getCurrentState().equals(GameState.DRAW) || game.getCurrentState().equals(GameState.NOUGHT_WON)
             || game.getCurrentState().equals(GameState.CROSS_WON);
     }
 
-    public void showCurrentPlayer() {
+    void showCurrentPlayer() {
         printer.currentPlayerDislay(game);
     }
 
-    public void getInputFromPlayer() {
-            PlayerInput playerInput = currentPlayer.getInputFromPlayer(game.getBoard());
-            boolean isCorrectInput = false;
-            while (!isCorrectInput) {
-                try {
-                    game.updateGameState(playerInput.getSeed(), playerInput.getRow(), playerInput.getCol());
-                    isCorrectInput = true;
-                } catch (OccupiedCellException e) {
-                    System.out.println("Current cell is not empty, try again");;
-                }
+    void getInputFromPlayer() {
+        PlayerInput playerInput = currentPlayer.getInputFromPlayer(game.getBoard());
+        boolean isCorrectInput = false;
+        while (!isCorrectInput) {
+            try {
+                game.updateGameState(playerInput.getSeed(), playerInput.getRow(), playerInput.getCol());
+                isCorrectInput = true;
+            } catch (OccupiedCellException e) {
+                System.out.println("Current cell is not empty, try again");;
+            }
     }
     }
 
-    public void showGameStatus() {
+    void showGameStatus() {
         printer.gameBoardDisplay(game, gameSize);
     }
 
-    public void showGameResults() {
+    void showGameResults() {
         if (game.getCurrentState().equals(GameState.DRAW))
             printer.drawDisplay();
         else
@@ -78,7 +74,7 @@ public class GameController {
     }
 
 
-    public void switchPlayers() {
+    void switchPlayers() {
         currentPlayer = firstPlayer.getSeed().equals(game.getCurrentPlayer()) ? firstPlayer : secondPlayer;
     }
 
@@ -89,7 +85,7 @@ public class GameController {
         return ui.getInputFromTo(minInput,maxInput);
     }
 
-    public boolean playAnotherGame() {
+    boolean playAnotherGame() {
         System.out.println("Want to play another game? Pick 1 = YES, 2 = NO");
         int minInput = 1;
         int maxInput = 2;

@@ -28,7 +28,6 @@ public class UserInterface {
                 numberIn.nextLine();
             }
         }
-
         return num;
     }
 

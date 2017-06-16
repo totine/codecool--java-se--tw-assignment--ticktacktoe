@@ -5,7 +5,7 @@ public class Cell {
     private int row;
     private int col;
 
-    public Cell(int row, int col) {
+    Cell(int row, int col) {
         this.row = row;
         this.col = col;
         this.content = Seed.EMPTY;
@@ -19,7 +19,7 @@ public class Cell {
         return col;
     }
 
-    public void clear(){
+    void clear(){
         this.content = Seed.EMPTY;
     }
 
@@ -27,7 +27,7 @@ public class Cell {
         return content;
     }
 
-    public void setContent(Seed seed) {
+    void setContent(Seed seed) {
         this.content = seed;
     }
 }

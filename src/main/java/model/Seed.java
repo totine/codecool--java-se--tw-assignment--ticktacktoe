@@ -6,7 +6,6 @@ public enum Seed {
     NOUGHT("O");
 
     String visualisation;
-
     Seed(String vis) {
         visualisation = vis;
     }

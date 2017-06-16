@@ -1,10 +1,5 @@
 package model;
 
-import java.util.concurrent.Callable;
-
-/**
- * Created by joanna on 15.06.17.
- */
 public enum GameMode {
     PLAYER_VS_PLAYER(1, new PlayerReal(Seed.CROSS)),
     PLAYER_VS_AI_EASY(2, new PlayerAIEasy(Seed.CROSS)),
@@ -24,18 +19,14 @@ public enum GameMode {
     GameMode(int option, Player playerClass) {
        this.optionNum = option;
        this.player = playerClass;
-
     }
+
     public static GameMode getByOptionNumber(int option) {
         for (GameMode mode : values()) {
             if (mode.getOptionNum() == option) {
                 return mode;
             }
-
         }
         throw new IllegalArgumentException();
-
     }
-
-
 }

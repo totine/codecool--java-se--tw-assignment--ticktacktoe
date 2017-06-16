@@ -3,7 +3,6 @@ package model;
 import ui.Printer;
 import ui.UserInterface;
 
-
 public class PlayerReal extends Player {
     private UserInterface ui;
 
@@ -40,8 +39,6 @@ public class PlayerReal extends Player {
                 printer.illegalArgumentExceptionMessage(boardSize);
             }
         }
-
         return rowOrColNumber;
     }
-
 }
